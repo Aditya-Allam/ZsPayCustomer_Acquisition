@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>Customer Equisition</title>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" style="background-image: url('https://img.freepik.com/free-photo/abstract-blur-empty-green-gradient-studio-well-use-as-background-website-template-frame-business-report_1258-52616.jpg?size=626&ext=jpg');">
+  <input type="hidden" name="oid" value="00D2w00000RIYSx">
+  <input type="hidden" name="retURL" value="https://cunning-bear-m2xqh-dev-ed.trailblaze.my.site.com/CustomerAquisition">
+  
+  <br><br><br><br>
+  <center>
+    <h1 style="color: DarkBlue;">Customer Acquisition</h1><br><br>
+    <h4 style="color: Red;">**Please Fill Out All Fields**</h4><br>
+    <label for="first_name">First Name:</label>
+    <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required /><br><br>
+    <label for="last_name">Last Name:</label>
+    <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required /><br><br>
+    <label for="email">Email:</label>
+    <input id="email" maxlength="80" name="email" size="20" type="email" required /><br><br>
+    <label for="phone">Phone:</label>
+    <input id="phone" maxlength="40" name="phone" size="20" type="text" required /><br><br>
+    Birth Date:
+    <span class="dateInput dateOnlyInput">
+      <input id="00N2w00000bTDaK" name="00N2w00000bTDaK" size="12" type="text" required /> <p style="color: DarkOrange;">(DD/MM/YYYY)</p>
+    </span><br><br>
+    <label for="street">Street:</label>
+    <textarea id="street" name="street" required></textarea><br><br>
+    <label for="city">City:</label>
+    <input id="city" maxlength="40" name="city" size="20" type="text" required /><br><br>
+    <label for="zip">Zip:</label>
+    <input id="zip" maxlength="20" name="zip" size="20" type="text" required /><br><br>
+    <label for="state">State/Province:</label>
+    <input id="state" maxlength="20" name="state" size="20" type="text" required /><br><br>
+    <label for="country">Country:</label>
+    <input id="country" maxlength="40" name="country" size="20" type="text" required /><br><br>
+    Social Security Number:
+    <input id="00N2w00000bTDt7" maxlength="30" name="00N2w00000bTDt7" size="20"type="text" pattern="^SSN.*2023.*$"   required /><br><br>
+    Requested Credit Amount:
+    <input id="00N2w00000bTDt2" name="00N2w00000bTDt2" size="20" type="number" max="25000" required /><br><br>
+    <input type="submit" name="submit" style="color: Blue;"><br><br><br>
+  </center>
+</form>
+<script>
+  // Inline JavaScript for input validations
+  document.querySelector('form').addEventListener('submit', function(event) {
+    var ssnField = document.getElementById('ssn');
+    var creditAmountField = document.getElementById('credit_amount');
+    var birthDateField = document.getElementById('birth_date');
+    var birthDateValue = new Date(birthDateField.value);
+    var currentYear = new Date().getFullYear();
+    if (!ssnField.value.startsWith('SSN') || !ssnField.value.includes('2023')) {
+      alert("Social Security Number should start with 'SSN' and contain '2023'.");
+      event.preventDefault();
+      return;
+    }
+    if (parseInt(creditAmountField.value) > 25000) {
+      alert('Requested Credit Amount should not be more than 25000.');
+      event.preventDefault();
+      return;
+    }
+    if (currentYear - birthDateValue.getFullYear() < 20) {
+      alert('The age should not be less than 20.');
+      event.preventDefault();
+      return;
+    }
+  });
+</script>
+</body>
+</html>
