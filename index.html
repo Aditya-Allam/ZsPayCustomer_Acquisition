@@ -6,7 +6,7 @@
 <body>
 <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" style="background-image: url('https://img.freepik.com/free-photo/abstract-blur-empty-green-gradient-studio-well-use-as-background-website-template-frame-business-report_1258-52616.jpg?size=626&ext=jpg');">
   <input type="hidden" name="oid" value="00D2w00000RIYSx">
-  <input type="hidden" name="retURL" value="https://zspaycustomer-acquisition.pages.dev/">
+  <input type="hidden" name="retURL" value="https://cunning-bear-m2xqh-dev-ed.trailblaze.my.site.com/CustomerAquisition">
   
   <br><br><br><br>
   <center>
@@ -22,7 +22,7 @@
     <input id="phone" maxlength="40" name="phone" size="20" type="text" required /><br><br>
     Birth Date:
     <span class="dateInput dateOnlyInput">
-      <input id="00N2w00000bTDaK" name="00N2w00000bTDaK" size="12" type="text" required /> <p style="color: DarkOrange;">(DD/MM/YYYY)</p>
+      <input id="00N2w00000bTDaK" name="00N2w00000bTDaK" size="12" type="text" pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d{2}" required /> <p style="color: DarkBlue;">(DD/MM/YYYY)</p>
     </span><br><br>
     <label for="street">Street:</label>
     <textarea id="street" name="street" required></textarea><br><br>
@@ -35,20 +35,25 @@
     <label for="country">Country:</label>
     <input id="country" maxlength="40" name="country" size="20" type="text" required /><br><br>
     Social Security Number:
-    <input id="00N2w00000bTDt7" maxlength="30" name="00N2w00000bTDt7" size="20"type="text" pattern="^SSN.*2023.*$"   required /><br><br>
+    <input id="00N2w00000bTDt7" maxlength="30" name="00N2w00000bTDt7" size="20"type="text"  required /><br><br>
     Requested Credit Amount:
-    <input id="00N2w00000bTDt2" name="00N2w00000bTDt2" size="20" type="number" max="25000" required /><br><br>
+    <input id="00N2w00000bTDt2" name="00N2w00000bTDt2" size="20" type="number" required /><br><br>
     <input type="submit" name="submit" style="color: Blue;"><br><br><br>
   </center>
 </form>
 <script>
   // Inline JavaScript for input validations
   document.querySelector('form').addEventListener('submit', function(event) {
-    var ssnField = document.getElementById('ssn');
-    var creditAmountField = document.getElementById('credit_amount');
-    var birthDateField = document.getElementById('birth_date');
+    var ssnField = document.getElementById('00N2w00000bTDt7');
+    var creditAmountField = document.getElementById('00N2w00000bTDt2');
+    var birthDateField = document.getElementById('00N2w00000bTDaK');
     var birthDateValue = new Date(birthDateField.value);
     var currentYear = new Date().getFullYear();
+	if (currentYear - birthDateValue.getFullYear() < 20) {
+      alert('The age should not be less than 20.');
+      event.preventDefault();
+      return;
+    }
     if (!ssnField.value.startsWith('SSN') || !ssnField.value.includes('2023')) {
       alert("Social Security Number should start with 'SSN' and contain '2023'.");
       event.preventDefault();
@@ -59,11 +64,7 @@
       event.preventDefault();
       return;
     }
-    if (currentYear - birthDateValue.getFullYear() < 20) {
-      alert('The age should not be less than 20.');
-      event.preventDefault();
-      return;
-    }
+    
   });
 </script>
 </body>
